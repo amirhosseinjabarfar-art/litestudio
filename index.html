@@ -1,0 +1,1358 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090916">
+<meta name="description" content="استودیو لایت؛ دنیایی از پروژه‌های خلاقانه، طراحی وب و ایده‌های متفاوت.">
+<title>استودیو لایت | Studio Light</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #090916;
+  --purple: #a855f7;
+  --pink: #ff4fd8;
+  --cyan: #45e5ff;
+  --white: #fff;
+  --muted: #aaaac5;
+  --panel: rgba(255,255,255,.055);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Vazirmatn', sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 15% 20%, #8b35ff20, transparent 35%),
+    radial-gradient(ellipse at 85% 50%, #ff38c018, transparent 35%),
+    radial-gradient(ellipse at 50% 100%, #12d9ff15, transparent 40%);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+/* پس‌زمینه متحرک */
+
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+  animation: floatParticle linear infinite;
+  opacity: .6;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(110vh) translateX(0) scale(.4);
+    opacity: 0;
+  }
+  15% { opacity: .8; }
+  85% { opacity: .5; }
+  100% {
+    transform: translateY(-10vh) translateX(80px) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* صفحه ورود */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #080812;
+  transition: opacity .9s ease, visibility .9s ease;
+}
+
+.intro.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-logo {
+  font: clamp(65px, 13vw, 135px) 'Lalezar', cursive;
+  background: linear-gradient(90deg, #fff, #bd70ff, #ff67d9, #fff);
+  background-size: 300% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: logoGlow 2s infinite, gradientMove 4s linear infinite;
+  filter: drop-shadow(0 0 25px #b34dff70);
+}
+
+.intro-line {
+  width: 0;
+  height: 3px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--pink), transparent);
+  animation: lineExpand 1.2s .3s ease forwards;
+}
+
+.intro-sub {
+  margin-top: 20px;
+  color: #c8b3e9;
+  letter-spacing: 4px;
+  font-size: 12px;
+  animation: blink 1.4s infinite;
+}
+
+@keyframes lineExpand {
+  to { width: min(360px, 75vw); }
+}
+
+@keyframes logoGlow {
+  0%, 100% { filter: drop-shadow(0 0 12px #a855f755); }
+  50% { filter: drop-shadow(0 0 38px #ff4fd899); }
+}
+
+@keyframes gradientMove {
+  to { background-position: 300% center; }
+}
+
+@keyframes blink {
+  50% { opacity: .35; }
+}
+
+/* نوار بالا */
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 15px 6%;
+  background: #090916c9;
+  backdrop-filter: blur(22px);
+  border-bottom: 1px solid #ffffff0d;
+  transition: .3s;
+}
+
+.navbar {
+  max-width: 1250px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand {
+  font: 32px 'Lalezar', cursive;
+  background: linear-gradient(90deg, var(--cyan), var(--pink));
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  color: #c4c3d8;
+  font-size: 13px;
+  transition: .3s;
+}
+
+.nav-links a:hover {
+  color: var(--cyan);
+  text-shadow: 0 0 15px var(--cyan);
+}
+
+.menu-btn {
+  display: none;
+  border: 1px solid #ffffff20;
+  background: var(--panel);
+  color: white;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+/* دکمه‌ها */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 24px;
+  border-radius: 14px;
+  color: white;
+  font-size: 14px;
+  border: 1px solid #ffffff22;
+  background: #ffffff08;
+  overflow: hidden;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: -80%;
+  left: -100%;
+  width: 60%;
+  height: 260%;
+  background: linear-gradient(90deg, transparent, #ffffff38, transparent);
+  transform: rotate(25deg);
+  transition: left .65s;
+}
+
+.btn:hover::before {
+  left: 150%;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  border-color: #a855f7a0;
+  box-shadow: 0 12px 35px #a855f728;
+}
+
+.btn-primary {
+  background: linear-gradient(110deg, #7c3aed, #c026d3);
+  border: none;
+  box-shadow: 0 0 28px #9c3dfb38;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 40px #b64aff70;
+}
+
+.btn-cyan {
+  border-color: #45e5ff60;
+  color: var(--cyan);
+}
+
+/* بخش اصلی */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 150px 22px 90px;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 950px;
+  animation: heroEnter 1.2s ease both;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 17px;
+  border: 1px solid #a855f74a;
+  border-radius: 100px;
+  background: #a855f710;
+  color: #e0b8ff;
+  font-size: 12px;
+  margin-bottom: 28px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #55ffbd;
+  box-shadow: 0 0 12px #55ffbd;
+  animation: blink 1s infinite;
+}
+
+.hero h1 {
+  font: clamp(58px, 10vw, 115px)/1.25 'Lalezar', cursive;
+  margin-bottom: 15px;
+  letter-spacing: -1px;
+}
+
+.gradient-text {
+  color: transparent;
+  background: linear-gradient(100deg, #fff, #b98aff, #ff71da, #5cecff, #fff);
+  background-size: 300% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: gradientMove 6s linear infinite;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: clamp(14px, 2vw, 17px);
+  line-height: 2.4;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 35px;
+}
+
+.hero-art {
+  position: relative;
+  width: 155px;
+  height: 155px;
+  margin: 45px auto 0;
+}
+
+.orbit {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #b36aff55;
+  border-radius: 50%;
+  animation: orbit 8s linear infinite;
+}
+
+.orbit:nth-child(2) {
+  inset: 15px -15px;
+  border-color: #45e5ff55;
+  animation-direction: reverse;
+  animation-duration: 11s;
+}
+
+.orbit::before {
+  content: "";
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--pink);
+  box-shadow: 0 0 20px var(--pink);
+}
+
+.art-core {
+  position: absolute;
+  inset: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 32px;
+  font: 50px 'Lalezar', cursive;
+  color: white;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  box-shadow: 0 0 55px #a855f766, inset 0 0 20px #ffffff38;
+  animation: corePulse 3s ease-in-out infinite;
+}
+
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes corePulse {
+  0%, 100% { transform: scale(1) rotate(-5deg); }
+  50% { transform: scale(1.09) rotate(5deg); }
+}
+
+@keyframes heroEnter {
+  from { opacity: 0; transform: translateY(35px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* جداکننده */
+
+.section {
+  max-width: 1250px;
+  margin: auto;
+  padding: 100px 6%;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-heading .mini {
+  color: var(--cyan);
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.section-heading h2 {
+  font: clamp(38px, 6vw, 58px) 'Lalezar', cursive;
+  margin: 10px 0;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* آمار */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 0 auto 30px;
+}
+
+.stat {
+  text-align: center;
+  padding: 24px 10px;
+  border: 1px solid #ffffff12;
+  background: var(--panel);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  transition: .35s;
+}
+
+.stat:hover {
+  transform: translateY(-7px);
+  border-color: #a855f766;
+  background: #a855f710;
+}
+
+.stat strong {
+  display: block;
+  font: 35px 'Lalezar', cursive;
+  color: #d8aaff;
+}
+
+.stat span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* کارت پروژه */
+
+.project-card {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 35px;
+  align-items: center;
+  padding: 28px;
+  border: 1px solid #ffffff17;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ffffff0b, #a855f70a);
+  box-shadow: 0 25px 80px #00000025;
+  position: relative;
+  overflow: hidden;
+  transition: .45s;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  top: -130px;
+  right: -100px;
+  background: #a855f720;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: #a855f770;
+  box-shadow: 0 25px 90px #a855f71c;
+}
+
+.project-preview {
+  position: relative;
+  min-height: 310px;
+  border-radius: 23px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 45%, #a855f755, transparent 50%),
+    linear-gradient(145deg, #17132d, #111025);
+  border: 1px solid #ffffff14;
+}
+
+.preview-orb {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 1px solid #c084fc55;
+  animation: orbit 14s linear infinite;
+}
+
+.preview-orb::before,
+.preview-orb::after {
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 25px var(--cyan);
+}
+
+.preview-orb::before {
+  top: 15px;
+  right: 35px;
+}
+
+.preview-orb::after {
+  bottom: 20px;
+  left: 15px;
+  background: var(--pink);
+  box-shadow: 0 0 25px var(--pink);
+}
+
+.preview-logo {
+  position: relative;
+  z-index: 1;
+  font: clamp(48px, 7vw, 72px) 'Lalezar', cursive;
+  background: linear-gradient(120deg, white, #c084fc, #ff65da);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0 0 22px #bc61ff70);
+  animation: blink 3s infinite;
+}
+
+.preview-label {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  font-size: 10px;
+  color: #b9b4d5;
+  direction: ltr;
+  letter-spacing: 2px;
+}
+
+.project-info {
+  position: relative;
+  z-index: 1;
+}
+
+.project-tag {
+  display: inline-block;
+  padding: 7px 13px;
+  border: 1px solid #45e5ff45;
+  border-radius: 100px;
+  color: var(--cyan);
+  background: #45e5ff0b;
+  font-size: 11px;
+  margin-bottom: 17px;
+}
+
+.project-info h3 {
+  font: clamp(37px, 5vw, 56px) 'Lalezar', cursive;
+  margin-bottom: 8px;
+}
+
+.project-info p {
+  color: var(--muted);
+  line-height: 2.3;
+  font-size: 14px;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 27px;
+}
+
+.feature {
+  font-size: 11px;
+  color: #e1d6f9;
+  padding: 8px 12px;
+  background: #ffffff08;
+  border: 1px solid #ffffff12;
+  border-radius: 10px;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* خدمات */
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.service {
+  padding: 28px 23px;
+  border: 1px solid #ffffff13;
+  background: var(--panel);
+  border-radius: 22px;
+  transition: .4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service:hover {
+  transform: translateY(-8px) scale(1.015);
+  border-color: #c084fc65;
+  box-shadow: 0 15px 40px #a855f718;
+}
+
+.service-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  font-size: 27px;
+  background: linear-gradient(135deg, #8b5cf633, #ec489933);
+  border: 1px solid #ffffff12;
+  margin-bottom: 20px;
+}
+
+.service h3 {
+  font: 24px 'Lalezar', cursive;
+  margin-bottom: 10px;
+}
+
+.service p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 2.2;
+}
+
+/* درباره */
+
+.about-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: center;
+  padding: 35px;
+  border: 1px solid #ffffff13;
+  background: linear-gradient(120deg, #a855f70d, #45e5ff07);
+  border-radius: 28px;
+}
+
+.about-box h3 {
+  font: 35px 'Lalezar', cursive;
+  margin-bottom: 15px;
+}
+
+.about-box p {
+  color: var(--muted);
+  line-height: 2.4;
+  font-size: 13px;
+}
+
+.about-visual {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: radial-gradient(circle, #a855f72a, transparent 65%);
+}
+
+.about-visual span {
+  font: clamp(45px, 7vw, 75px) 'Lalezar', cursive;
+  background: linear-gradient(90deg, var(--cyan), var(--pink));
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0 0 20px #a855f766);
+  animation: corePulse 4s infinite;
+}
+
+/* دعوت پایانی */
+
+.cta {
+  text-align: center;
+  padding: 55px 20px;
+  border: 1px solid #a855f730;
+  border-radius: 28px;
+  background:
+    radial-gradient(ellipse at top, #a855f71c, transparent 65%),
+    #ffffff04;
+}
+
+.cta h2 {
+  font: clamp(35px, 6vw, 55px) 'Lalezar', cursive;
+  margin-bottom: 15px;
+}
+
+.cta p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+/* پانوشت */
+
+footer {
+  padding: 35px 6%;
+  text-align: center;
+  border-top: 1px solid #ffffff12;
+  background: #060610;
+}
+
+.footer-logo {
+  font: 35px 'Lalezar', cursive;
+  color: #d7a2ff;
+}
+
+footer p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 2.4;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin: 17px 0;
+}
+
+.footer-links a {
+  color: #c7bddc;
+  font-size: 12px;
+}
+
+.footer-links a:hover {
+  color: var(--cyan);
+}
+
+.copyright {
+  margin-top: 18px;
+  color: #77758f;
+  font-size: 11px;
+}
+
+/* دکمه بازگشت */
+
+.back-top {
+  position: fixed;
+  bottom: 22px;
+  left: 22px;
+  z-index: 900;
+  width: 45px;
+  height: 45px;
+  border-radius: 15px;
+  border: 1px solid #a855f755;
+  background: #171027dd;
+  color: white;
+  font-size: 21px;
+  backdrop-filter: blur(15px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: .3s;
+}
+
+.back-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* انیمیشن نمایش هنگام اسکرول */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: .12s; }
+.delay-2 { transition-delay: .24s; }
+
+/* نشانگر موس */
+
+.cursor-glow {
+  position: fixed;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(circle, #a855f70b, transparent 70%);
+  transform: translate(-50%, -50%);
+}
+
+/* موبایل و تبلت */
+
+@media (max-width: 850px) {
+  .nav-links {
+    position: absolute;
+    top: 75px;
+    right: 5%;
+    left: 5%;
+    padding: 22px;
+    background: #111020f5;
+    border: 1px solid #ffffff18;
+    border-radius: 20px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    box-shadow: 0 20px 60px #0008;
+  }
+
+  .nav-links.open {
+    display: flex;
+    animation: heroEnter .3s ease;
+  }
+
+  .nav-links a {
+    padding: 13px 8px;
+    border-bottom: 1px solid #ffffff0c;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .project-preview {
+    min-height: 260px;
+  }
+
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-box {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  header {
+    padding: 12px 5%;
+  }
+
+  .brand {
+    font-size: 28px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 155px;
+    padding-bottom: 70px;
+  }
+
+  .hero h1 {
+    font-size: 62px;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+
+  .hero-art {
+    transform: scale(.85);
+    margin-top: 25px;
+  }
+
+  .section {
+    padding: 70px 5%;
+  }
+
+  .stats {
+    gap: 8px;
+  }
+
+  .stat {
+    padding: 18px 5px;
+  }
+
+  .stat strong {
+    font-size: 28px;
+  }
+
+  .stat span {
+    font-size: 10px;
+  }
+
+  .project-card {
+    padding: 15px;
+    gap: 22px;
+    border-radius: 22px;
+  }
+
+  .project-preview {
+    min-height: 230px;
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+  }
+
+  .service {
+    padding: 23px;
+  }
+
+  .about-box {
+    padding: 20px;
+  }
+
+  .project-actions .btn {
+    width: 100%;
+  }
+
+  .hero-buttons .btn {
+    min-width: 155px;
+  }
+
+  .section-heading {
+    margin-bottom: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="particles"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ورود انیمیشنی -->
+<div class="intro" id="intro">
+  <div class="intro-logo">لایت</div>
+  <div class="intro-line"></div>
+  <div class="intro-sub">STUDIO LIGHT · CREATIVE WORLD</div>
+</div>
+
+<!-- نوار بالا -->
+<header id="header">
+  <nav class="navbar">
+    <a href="#home" class="brand">استودیو لایت ✦</a>
+
+    <button class="menu-btn" id="menuBtn" aria-label="باز کردن منو">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home">خانه</a>
+      <a href="#projects">پروژه‌ها</a>
+      <a href="#services">توانایی‌ها</a>
+      <a href="#about">درباره ما</a>
+      <a href="#contact">ارتباط</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- صفحه اصلی -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="eyebrow">
+        <span class="live-dot"></span>
+        دنیای خلاقیت، از اینجا شروع می‌شود
+      </div>
+
+      <h1>
+        اینجا دنیای<br>
+        <span class="gradient-text">استودیو لایت</span>
+      </h1>
+
+      <p>
+        به دنیایی خوش آمدی که ایده‌ها جان می‌گیرند!
+        از وب‌سایت‌های متفاوت تا پروژه‌های خلاقانه؛
+        اینجا هر پروژه داستان خودش را دارد.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">
+          ✨ مشاهده پروژه‌ها
+        </a>
+        <a href="#about" class="btn btn-cyan">
+          درباره استودیو ←
+        </a>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+        <div class="art-core">لایت</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- آمار -->
+  <section class="section reveal">
+    <div class="stats">
+      <div class="stat">
+        <strong>۰۱</strong>
+        <span>پروژه معرفی‌شده</span>
+      </div>
+      <div class="stat">
+        <strong>∞</strong>
+        <span>ایده‌های خلاقانه</span>
+      </div>
+      <div class="stat">
+        <strong>۱۰۰٪</strong>
+        <span>اشتیاق به ساختن</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- پروژه‌ها -->
+  <section class="section" id="projects">
+    <div class="section-heading reveal">
+      <span class="mini">OUR CREATIONS · 01</span>
+      <h2>پروژه‌های ما</h2>
+      <p>اولین اثر استودیو لایت را کشف کن!</p>
+    </div>
+
+    <article class="project-card reveal">
+      <div class="project-preview">
+        <div class="preview-orb"></div>
+        <div class="preview-logo">شعر شو</div>
+        <span class="preview-label">STUDIO LIGHT · PROJECT 01</span>
+      </div>
+
+      <div class="project-info">
+        <span class="project-tag">✦ اولین پروژه رسمی</span>
+        <h3>شعر شو</h3>
+        <p>
+          دنیای شعر، سرگرمی و رقابت! شعر شو یک پروژه وب فارسی
+          است که برای تجربه‌ای متفاوت از بازی‌های شعرمحور ساخته شده.
+          وارد سایت شو، بخش‌های مختلف آن را ببین و دنیای شعر را کشف کن.
+        </p>
+
+        <div class="features">
+          <span class="feature">🌐 وب‌اپلیکیشن</span>
+          <span class="feature">📜 بازی شعر</span>
+          <span class="feature">⚔️ رقابت</span>
+          <span class="feature">🎨 طراحی فارسی</span>
+        </div>
+
+        <div class="project-actions">
+          <a
+            class="btn btn-primary"
+            href="https://amirhosseinjabarfar-art.github.io/sheersho/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🚀 ورود به شعر شو
+          </a>
+
+          <a class="btn" href="#about">
+            اطلاعات بیشتر
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <div style="text-align:center;margin-top:28px" class="reveal">
+      <span class="project-tag">✨ پروژه‌های جدید در راه‌اند</span>
+    </div>
+  </section>
+
+  <!-- توانایی‌ها -->
+  <section class="section" id="services">
+    <div class="section-heading reveal">
+      <span class="mini">WHAT WE CREATE</span>
+      <h2>دنیای ساختن</h2>
+      <p>ایده‌هایی که می‌توانند به تجربه‌هایی واقعی تبدیل شوند.</p>
+    </div>
+
+    <div class="services">
+      <article class="service reveal">
+        <div class="service-icon">🌐</div>
+        <h3>طراحی وب</h3>
+        <p>
+          طراحی وب‌سایت‌های مدرن، واکنش‌گرا و فارسی با
+          جزئیات بصری جذاب و تجربه کاربری مناسب.
+        </p>
+      </article>
+
+      <article class="service reveal delay-1">
+        <div class="service-icon">⚡</div>
+        <h3>تجربه‌های تعاملی</h3>
+        <p>
+          انیمیشن‌ها، جلوه‌های بصری و تعامل‌های جذاب
+          برای تبدیل صفحات ساده به تجربه‌هایی متفاوت.
+        </p>
+      </article>
+
+      <article class="service reveal delay-2">
+        <div class="service-icon">💡</div>
+        <h3>ایده‌های تازه</h3>
+        <p>
+          تبدیل ایده‌های خلاقانه به پروژه‌هایی کاربردی،
+          سرگرم‌کننده و قابل استفاده در دستگاه‌های مختلف.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- درباره -->
+  <section class="section" id="about">
+    <div class="section-heading reveal">
+      <span class="mini">ABOUT THE STUDIO</span>
+      <h2>داستان استودیو لایت</h2>
+    </div>
+
+    <div class="about-box reveal">
+      <div>
+        <h3>ایده‌ها را روشن می‌کنیم ✦</h3>
+        <p>
+          استودیو لایت فضایی برای معرفی پروژه‌های خلاقانه،
+          تجربه‌های دیجیتال و ایده‌هایی است که با علاقه ساخته می‌شوند.
+          اولین پروژه این مجموعه، شعر شو، شروع این مسیر است.
+          هدف ما ساختن تجربه‌هایی جذاب، متفاوت و قابل دسترس برای همه است.
+        </p>
+        <br>
+        <p>
+          <strong style="color:#d7a2ff">سازنده:</strong>
+          امیر حسین جبارفر
+        </p>
+      </div>
+
+      <div class="about-visual">
+        <span>LIGHT ✦</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- دعوت پایانی -->
+  <section class="section" id="contact">
+    <div class="cta reveal">
+      <h2>آماده‌ای وارد دنیای ما شوی؟</h2>
+      <p>
+        اولین پروژه استودیو لایت منتظر توست.
+        شعر شو را باز کن و تجربه‌اش کن!
+      </p>
+      <a
+        href="https://amirhosseinjabarfar-art.github.io/sheersho/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-primary"
+      >
+        🚀 ورود به اولین پروژه
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- پانوشت -->
+<footer>
+  <div class="footer-logo">استودیو لایت ✦</div>
+  <p>ایده‌های روشن، تجربه‌های متفاوت.</p>
+
+  <div class="footer-links">
+    <a href="#home">خانه</a>
+    <a href="#projects">پروژه‌ها</a>
+    <a href="#services">توانایی‌ها</a>
+    <a href="#about">درباره ما</a>
+  </div>
+
+  <div class="copyright">
+    © ۱۴۰۵ استودیو لایت
+    <br>
+    ساخته شده با عشق به خلاقیت توسط امیر حسین جبارفر
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="بازگشت به بالا">↑</button>
+
+<script>
+/* ساخت ذرات نورانی */
+const particles = document.getElementById('particles');
+
+for (let i = 0; i < 65; i++) {
+  const particle = document.createElement('span');
+  particle.className = 'particle';
+
+  particle.style.left = Math.random() * 100 + '%';
+  particle.style.animationDuration = (7 + Math.random() * 15) + 's';
+  particle.style.animationDelay = (-Math.random() * 20) + 's';
+
+  if (i % 3 === 0) {
+    particle.style.background = '#ff4fd8';
+    particle.style.boxShadow = '0 0 12px #ff4fd8';
+  } else if (i % 3 === 1) {
+    particle.style.background = '#a855f7';
+    particle.style.boxShadow = '0 0 12px #a855f7';
+  }
+
+  particles.appendChild(particle);
+}
+
+/* پایان ورود اولیه؛ بدون خط لودینگ */
+const intro = document.getElementById('intro');
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    intro.classList.add('hide');
+  }, 1800);
+});
+
+/* منوی موبایل */
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+
+menuBtn.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  menuBtn.textContent = isOpen ? '✕' : '☰';
+  menuBtn.setAttribute('aria-expanded', String(isOpen));
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuBtn.textContent = '☰';
+    menuBtn.setAttribute('aria-expanded', 'false');
+  });
+});
+
+/* نمایش بخش‌ها هنگام اسکرول */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.12
+});
+
+document.querySelectorAll('.reveal').forEach(element => {
+  observer.observe(element);
+});
+
+/* دکمه بازگشت به بالا */
+const backTop = document.getElementById('backTop');
+
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('show', window.scrollY > 450);
+
+  document.getElementById('header').style.boxShadow =
+    window.scrollY > 30 ? '0 8px 35px #0004' : 'none';
+});
+
+backTop.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+/* درخشش دنبال‌کننده موس در رایانه */
+const cursorGlow = document.getElementById('cursorGlow');
+
+if (window.matchMedia('(pointer: fine)').matches) {
+  window.addEventListener('pointermove', event => {
+    cursorGlow.style.left = event.clientX + 'px';
+    cursorGlow.style.top = event.clientY + 'px';
+  });
+} else {
+  cursorGlow.style.display = 'none';
+}
+
+/* حرکت سه‌بعدی ملایم کارت پروژه */
+const projectCard = document.querySelector('.project-card');
+
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  projectCard.addEventListener('pointermove', event => {
+    const rect = projectCard.getBoundingClientRect();
+
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+    projectCard.style.transform =
+      `perspective(1200px) rotateY(${x * 2.5}deg) rotateX(${-y * 2.5}deg) translateY(-5px)`;
+  });
+
+  projectCard.addEventListener('pointerleave', () => {
+    projectCard.style.transform = '';
+  });
+}
+
+/* سال پانوشت */
+const currentYear = new Intl.DateTimeFormat('fa-IR', {
+  year: 'numeric',
+  calendar: 'persian'
+}).format(new Date());
+
+document.querySelector('.copyright').innerHTML =
+  `© ${currentYear} استودیو لایت<br>
+  ساخته شده با عشق به خلاقیت توسط امیر حسین جبارفر`;
+</script>
+
+</body>
+</html>
+```
